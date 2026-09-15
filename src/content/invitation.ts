@@ -11,6 +11,7 @@ export const invitation = {
     groomParents: "Anna Roy & Roy C Paul",
     brideParents: "Elmira Bakaeva & Ilgam Bakaev",
   },
+  productionUrl: "https://roshan-weds-indira.invitestory.in",
   /** ISO date-time of the ceremony, used by the countdown and calendar file. */
   dateISO: "2027-01-28T10:30:00+05:30",
   dateLabel: "Thursday, 28 January 2027",

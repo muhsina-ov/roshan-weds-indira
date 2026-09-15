@@ -80,11 +80,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Roshan Roy & Indira Bakaeva — Wedding Invitation" },
       {
         name: "description",
-        content: "Roshan Roy & Indira Bakaeva Wedding Storybook Invitation.",
+        content: "Together with their families, Roshan Roy and Indira Bakaeva invite you to celebrate their Holy Matrimony at St. Alphonsa’s Church and Reception at Cherish Ballroom on Thursday, 28th January 2027.",
       },
       { name: "theme-color", content: "#fdf8ef" },
+      { property: "og:site_name", content: "Roshan & Indira Wedding Storybook" },
+      { property: "og:url", content: "https://roshan-weds-indira.invitestory.in" },
+      { property: "og:image", content: "https://roshan-weds-indira.invitestory.in/og-image.jpg" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://roshan-weds-indira.invitestory.in/og-image.jpg" },
     ],
     links: [
       {
