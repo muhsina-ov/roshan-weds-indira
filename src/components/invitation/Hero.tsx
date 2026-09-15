@@ -130,10 +130,9 @@ export function Hero() {
           transition={{ duration: 1.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
           className="mt-5 text-[2.15rem] leading-[1.15] text-primary drop-shadow-[0_2px_18px_rgba(255,255,255,0.55)] sm:text-6xl md:text-7xl"
         >
-          <span>{invitation.couple.groom}</span>
-          <br className="sm:hidden" />
-          <span className="mx-2 font-script text-3xl italic sm:mx-3 sm:text-4xl">&amp;</span>
-          <span>{invitation.couple.bride}</span>
+          <span className="block sm:inline">{invitation.couple.groom}</span>
+          <span className="my-0.5 block font-script text-2xl italic sm:mx-3 sm:my-0 sm:inline sm:text-4xl">&amp;</span>
+          <span className="block sm:inline">{invitation.couple.bride}</span>
         </motion.h1>
 
         {/* Parents Honor */}
