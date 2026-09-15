@@ -128,12 +128,12 @@ export function Hero() {
           initial={{ opacity: 0, y: 22, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-5 text-4xl leading-[1.05] text-primary drop-shadow-[0_2px_18px_rgba(255,255,255,0.55)] sm:text-6xl md:text-7xl"
+          className="mt-5 text-[2.15rem] leading-[1.15] text-primary drop-shadow-[0_2px_18px_rgba(255,255,255,0.55)] sm:text-6xl md:text-7xl"
         >
-          {invitation.couple.groom}
-          <span className="mx-3 font-script text-3xl italic sm:text-4xl">&amp;</span>
+          <span>{invitation.couple.groom}</span>
           <br className="sm:hidden" />
-          {invitation.couple.bride}
+          <span className="mx-2 font-script text-3xl italic sm:mx-3 sm:text-4xl">&amp;</span>
+          <span>{invitation.couple.bride}</span>
         </motion.h1>
 
         {/* Parents Honor */}
@@ -141,10 +141,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.65 }}
-          className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-sans text-[0.62rem] tracking-[0.24em] text-primary/80 uppercase sm:text-[0.72rem]"
+          className="mt-4 flex flex-col items-center justify-center gap-1 font-sans text-[0.6rem] tracking-[0.2em] text-primary/80 uppercase sm:flex-row sm:gap-x-3 sm:text-[0.72rem]"
         >
           <span>Son of {invitation.couple.groomParents}</span>
-          <span className="font-script text-sm text-gold-deep italic lowercase">&amp;</span>
+          <span className="hidden font-script text-sm text-gold-deep italic lowercase sm:inline">&amp;</span>
           <span>Daughter of {invitation.couple.brideParents}</span>
         </motion.div>
 
