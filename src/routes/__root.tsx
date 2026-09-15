@@ -80,15 +80,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Roshan Roy & Indira Bakaeva — Wedding Invitation" },
       {
         name: "description",
-        content: "Together with their families, Roshan Roy and Indira Bakaeva invite you to celebrate their Holy Matrimony at St. Alphonsa’s Church and Reception at Cherish Ballroom on Thursday, 28th January 2027.",
+        content: "Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church & Cherish Ballroom, Rubicon Glasshouse.",
       },
       { name: "theme-color", content: "#fdf8ef" },
       { property: "og:site_name", content: "Roshan & Indira Wedding Storybook" },
-      { property: "og:url", content: "https://roshan-weds-indira.invitestory.in" },
-      { property: "og:image", content: "https://roshan-weds-indira.invitestory.in/og-image.jpg" },
+      { property: "og:title", content: "Roshan Roy & Indira Bakaeva — Wedding Invitation" },
+      {
+        property: "og:description",
+        content: "Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church & Cherish Ballroom, Rubicon Glasshouse.",
+      },
+      { property: "og:url", content: "https://roshan-weds-indira.invitingyou.top" },
+      { property: "og:image", content: "https://roshan-weds-indira.invitingyou.top/og-image.jpg" },
+      { property: "og:image:secure_url", content: "https://roshan-weds-indira.invitingyou.top/og-image.jpg" },
+      { property: "og:image:type", content: "image/jpeg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://roshan-weds-indira.invitestory.in/og-image.jpg" },
+      { name: "twitter:title", content: "Roshan Roy & Indira Bakaeva — Wedding Invitation" },
+      {
+        name: "twitter:description",
+        content: "Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church & Cherish Ballroom, Rubicon Glasshouse.",
+      },
+      { name: "twitter:image", content: "https://roshan-weds-indira.invitingyou.top/og-image.jpg" },
     ],
     links: [
       {
