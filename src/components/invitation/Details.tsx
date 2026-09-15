@@ -127,7 +127,7 @@ export function Details() {
           <div className="plate relative overflow-hidden rounded-[2rem]">
             <img
               src={mapPlate}
-              alt="Hand-painted illustrated map of the old city with the palace marked"
+              alt="Hand-painted illustrated wedding venue map with St. Alphonsa’s Church & Cherish Ballroom marked"
               loading="lazy"
               width={1280}
               height={1024}

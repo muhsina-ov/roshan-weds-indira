@@ -1,12 +1,12 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ChevronDown } from "lucide-react";
-const heroPalace = "https://media.invitestory.in/ever-after-bloom/src/assets/hero-palace.jpg";
+import heroChurch from "@/assets/hero-church.jpg";
 const bougainvillea = "https://media.invitestory.in/ever-after-bloom/src/assets/bougainvillea.png";
 import { LanternField } from "./LanternField";
 import { Petals } from "./Petals";
 import { invitation } from "@/content/invitation";
 
-/** Chapter one: the palace at dawn, with the sky as the stage. */
+/** Chapter one: the church at dawn, with the sky as the stage. */
 export function Hero() {
   const reduced = useReducedMotion();
   const { scrollY } = useScroll();
@@ -17,11 +17,11 @@ export function Hero() {
 
   return (
     <section className="relative h-[100svh] min-h-[620px] w-full overflow-hidden">
-      {/* Painted sky + palace plate */}
+      {/* Painted sky + church plate */}
       <motion.div className="absolute inset-0" style={{ y: skyY, scale: 1.08 }}>
         <img
-          src={heroPalace}
-          alt="Watercolour illustration of a sandstone palace beneath a blush dawn sky"
+          src={heroChurch}
+          alt="Watercolour illustration of St. Alphonsa’s Church beneath a blush dawn sky"
           width={1024}
           height={1536}
           className="h-full w-full object-cover object-bottom"
