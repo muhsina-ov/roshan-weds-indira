@@ -1,0 +1,213 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-display: "Marcellus", ui-serif, Georgia, serif;
+  --font-script: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Storybook palette */
+  --color-blush: var(--blush);
+  --color-peach: var(--peach);
+  --color-lavender: var(--lavender);
+  --color-cream: var(--cream);
+  --color-ivory: var(--ivory);
+  --color-olive: var(--olive);
+  --color-sage: var(--sage);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-sandstone: var(--sandstone);
+  --color-skyblue: var(--skyblue);
+  --color-rose: var(--rose);
+}
+
+:root {
+  --radius: 1rem;
+
+  --blush: oklch(0.9 0.045 8);
+  --peach: oklch(0.9 0.07 55);
+  --lavender: oklch(0.87 0.05 300);
+  --cream: oklch(0.972 0.017 85);
+  --ivory: oklch(0.985 0.01 90);
+  --olive: oklch(0.48 0.055 120);
+  --sage: oklch(0.75 0.045 135);
+  --gold: oklch(0.79 0.11 85);
+  --gold-deep: oklch(0.63 0.11 78);
+  --sandstone: oklch(0.79 0.06 70);
+  --skyblue: oklch(0.9 0.035 240);
+  --rose: oklch(0.65 0.16 5);
+
+  --background: var(--ivory);
+  --foreground: oklch(0.32 0.035 60);
+  --card: oklch(0.99 0.008 90);
+  --card-foreground: oklch(0.32 0.035 60);
+  --popover: oklch(0.99 0.008 90);
+  --popover-foreground: oklch(0.32 0.035 60);
+  --primary: oklch(0.42 0.06 40);
+  --primary-foreground: oklch(0.985 0.01 90);
+  --secondary: oklch(0.95 0.025 60);
+  --secondary-foreground: oklch(0.38 0.05 45);
+  --muted: oklch(0.955 0.018 75);
+  --muted-foreground: oklch(0.52 0.03 60);
+  --accent: var(--blush);
+  --accent-foreground: oklch(0.35 0.05 25);
+  --destructive: oklch(0.577 0.18 27);
+  --destructive-foreground: oklch(0.985 0.01 90);
+  --border: oklch(0.88 0.025 75);
+  --input: oklch(0.88 0.025 75);
+  --ring: var(--gold);
+
+  --gradient-dawn: linear-gradient(
+    180deg,
+    oklch(0.93 0.04 320) 0%,
+    var(--blush) 32%,
+    var(--peach) 66%,
+    var(--cream) 100%
+  );
+  --gradient-gold: linear-gradient(
+    100deg,
+    var(--gold-deep) 0%,
+    oklch(0.92 0.09 92) 45%,
+    var(--gold-deep) 100%
+  );
+  --shadow-plate: 0 24px 60px -28px color-mix(in oklab, var(--gold-deep) 40%, transparent);
+  --shadow-glow: 0 0 48px color-mix(in oklab, var(--gold) 55%, transparent);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Hand-made paper grain overlay */
+@utility paper-grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(
+        circle at 20% 30%,
+        color-mix(in oklab, var(--sandstone) 12%, transparent),
+        transparent 60%
+      ),
+      radial-gradient(
+        circle at 80% 70%,
+        color-mix(in oklab, var(--blush) 14%, transparent),
+        transparent 55%
+      );
+  }
+}
+
+@utility gold-text {
+  background: var(--gradient-gold);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility plate {
+  background-color: color-mix(in oklab, var(--card) 88%, var(--cream));
+  border: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+  box-shadow: var(--shadow-plate);
+}
+
+@utility glass-plate {
+  background-color: color-mix(in oklab, var(--ivory) 42%, transparent);
+  backdrop-filter: blur(18px) saturate(135%);
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  box-shadow: var(--shadow-plate);
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -60% 0;
+  }
+}
+
+@utility shimmer {
+  animation: shimmer-sweep 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
