@@ -101,7 +101,7 @@ export function Gallery() {
             <motion.img
               src={plates[open]!.src}
               alt={plates[open]!.alt}
-              className="max-h-[82vh] w-auto rounded-[1.4rem] shadow-2xl"
+              className="max-h-[85vh] max-w-[92vw] w-auto h-auto rounded-[1.4rem] shadow-2xl object-contain"
               initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.94, opacity: 0 }}
