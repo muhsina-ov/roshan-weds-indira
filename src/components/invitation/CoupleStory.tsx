@@ -2,10 +2,18 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import coupleSunset from "@/assets/couple-sunset-golden.png";
 import coupleBwStudio from "@/assets/couple-studio-sitting.png";
+import coupleBallroom from "@/assets/couple-ballroom-reception.jpg";
 import { invitation } from "@/content/invitation";
 import { Ornament, Reveal, SectionTitle } from "./Reveal";
 
 const couplePortraits = [
+  {
+    id: "ballroom",
+    label: "Ballroom Gala",
+    caption: "Radiance & celebration at Cherish Ballroom",
+    src: coupleBallroom,
+    alt: "Roshan Roy and Indira Bakaeva in elegant evening attire at Cherish Ballroom reception",
+  },
   {
     id: "sunset",
     label: "Sunset Romance",
@@ -50,7 +58,7 @@ export function CoupleStory() {
               {/* Couple Portraits Showcase with Switcher */}
               <div className="flex flex-col items-center justify-center lg:col-span-6 space-y-4">
                 {/* Photo Selector Switch */}
-                <div className="flex items-center gap-1.5 rounded-full bg-primary/10 p-1 backdrop-blur-xs border border-gold/30 shadow-xs">
+                <div className="flex flex-wrap justify-center items-center gap-1.5 rounded-full bg-primary/10 p-1 backdrop-blur-xs border border-gold/30 shadow-xs">
                   {couplePortraits.map((p, idx) => (
                     <button
                       key={p.id}

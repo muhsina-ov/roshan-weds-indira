@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import coupleBwStudio from "@/assets/couple-studio-sitting.png";
 import coupleSunset from "@/assets/couple-sunset-golden.png";
+import coupleBallroom from "@/assets/couple-ballroom-reception.jpg";
 import { invitation } from "@/content/invitation";
 import { Ornament, Reveal, SectionTitle } from "./Reveal";
 
@@ -15,16 +16,22 @@ interface PhotoItem {
 
 const photos: PhotoItem[] = [
   {
-    src: coupleBwStudio,
-    title: "Timeless Elegance",
-    tag: "Studio Portrait",
-    description: "Sitting side by side, united in poise and timeless grace.",
+    src: coupleBallroom,
+    title: "Ballroom Celebration",
+    tag: "Reception Gala",
+    description: "Radiant together beneath the ballroom chandeliers, surrounded by love and festive celebration.",
   },
   {
     src: coupleSunset,
     title: "Golden Hour Promise",
     tag: "Romantic Serenade",
     description: "Lost in each other's eyes as the sunset blankets the horizon in warm golden light.",
+  },
+  {
+    src: coupleBwStudio,
+    title: "Timeless Elegance",
+    tag: "Studio Portrait",
+    description: "Sitting side by side, united in poise and timeless grace.",
   },
 ];
 
@@ -62,7 +69,7 @@ export function Gallery() {
         <SectionTitle eyebrow="Chapter Four" title="Painted moments" note="Portraits of our love" />
         <Ornament className="mt-8" />
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {photos.map((photo, index) => (
             <Reveal key={photo.src} delay={index * 0.1} className="w-full">
               <motion.button

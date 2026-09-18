@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { CalendarPlus, ChevronDown, Download, ExternalLink, MapPin, Shirt, Sparkles } from "lucide-react";
-const mapPlate = "https://media.invitestory.in/ever-after-bloom/src/assets/map-plate.jpg";
-const car = "https://media.invitestory.in/ever-after-bloom/src/assets/wedding-car.png";
+import churchMapPlate from "@/assets/church-map-plate.jpg";
 import { invitation } from "@/content/invitation";
 import { Ornament, Reveal, SectionTitle } from "./Reveal";
 
@@ -206,39 +205,43 @@ export function Details() {
           </motion.a>
         </Reveal>
 
-        {/* Illustrated map plate with the wedding car rolling in */}
+        {/* Illustrated Christian Church & Parish Grounds Plate */}
         <Reveal delay={0.14} className="mt-12">
-          <div className="plate relative overflow-hidden rounded-[2rem]">
-            <img
-              src={mapPlate}
-              alt="Hand-painted illustrated wedding venue map with St. Alphonsa’s Church & Cherish Ballroom marked"
-              loading="lazy"
-              width={1280}
-              height={1024}
-              className="h-64 w-full object-cover sm:h-80"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(0deg, color-mix(in oklab, var(--cream) 55%, transparent), transparent 55%)",
-              }}
-            />
-            <motion.img
-              src={car}
-              alt=""
-              aria-hidden
-              loading="lazy"
-              width={1175}
-              height={567}
-              className="absolute bottom-2 left-0 w-40 sm:w-56"
-              initial={{ x: -80, opacity: 0 }}
-              whileInView={{ x: 24, opacity: 1 }}
-              viewport={{ once: true, margin: "-15%" }}
-              transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-            />
-          </div>
+          <motion.div
+            whileHover={{ y: -3 }}
+            transition={{ duration: 0.3 }}
+            className="plate paper-grain relative overflow-hidden rounded-[2.2rem] p-3 sm:p-4 shadow-xl border border-gold/35"
+          >
+            <div className="relative overflow-hidden rounded-[1.8rem] bg-[#fbf8f2]">
+              <img
+                src={churchMapPlate}
+                alt="Hand-painted watercolor illustration of St. Alphonsa’s Church parish grounds, bell tower, and surrounding gardens"
+                loading="lazy"
+                width={1000}
+                height={880}
+                className="w-full h-auto max-h-[520px] object-contain sm:object-cover mx-auto"
+              />
+
+              {/* Elegant Venue Info Overlay Pill */}
+              <div
+                className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-end p-4 sm:p-6 text-center"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(30, 20, 15, 0.72) 0%, rgba(30, 20, 15, 0.35) 45%, transparent 100%)",
+                }}
+              >
+                <div className="glass-plate shimmer inline-flex items-center gap-2 rounded-full px-4 py-1.5 backdrop-blur-md border border-white/30 text-white shadow-lg mb-1">
+                  <MapPin size={13} className="text-gold-light" />
+                  <span className="font-sans text-[0.62rem] sm:text-xs font-semibold tracking-[0.2em] uppercase text-white drop-shadow-xs">
+                    St. Alphonsa’s Church · Parish Grounds
+                  </span>
+                </div>
+                <p className="font-script text-white/95 text-base sm:text-xl drop-shadow-sm italic">
+                  Holy Matrimony Sanctuary &amp; Wedding Courtyard
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </Reveal>
       </div>
     </section>
