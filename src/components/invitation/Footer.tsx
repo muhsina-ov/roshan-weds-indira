@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { Heart } from "lucide-react";
+import { Heart, MessageCircle, Phone } from "lucide-react";
 const sunset = "https://media.invitestory.in/ever-after-bloom/src/assets/sunset-sky.jpg";
 const lanternImg = "https://media.invitestory.in/ever-after-bloom/src/assets/lantern.png";
 import { invitation } from "@/content/invitation";
@@ -113,12 +113,57 @@ export function Footer() {
           {invitation.footer.line2}
         </h2>
 
+        {/* ── Royal RSVP Section ────────────────────────────── */}
+        <div className="mt-12 plate paper-grain rounded-[2rem] p-6 sm:p-8 shadow-xl border border-gold/30">
+          <p className="font-sans text-[0.62rem] tracking-[0.38em] text-gold-deep uppercase font-semibold">
+            {invitation.rsvp.title}
+          </p>
+          <p className="mt-1 font-script text-xl sm:text-2xl text-primary italic">
+            {invitation.rsvp.note}
+          </p>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {invitation.rsvp.contacts.map((contact) => (
+              <div
+                key={contact.phone}
+                className="rounded-2xl border border-primary/15 bg-white/70 p-4 shadow-xs backdrop-blur-xs flex flex-col items-center justify-between"
+              >
+                <p className="font-sans text-[0.65rem] tracking-[0.2em] text-primary/75 uppercase font-medium">
+                  {contact.name}
+                </p>
+                <p className="mt-1.5 font-display text-lg sm:text-xl text-primary tracking-wide">
+                  {contact.display}
+                </p>
+
+                <div className="mt-3.5 flex items-center gap-2">
+                  <a
+                    href={contact.tel}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3.5 py-1.5 text-[0.62rem] font-sans tracking-[0.16em] text-primary hover:bg-primary hover:text-white transition uppercase"
+                    aria-label={`Call ${contact.name}`}
+                  >
+                    <Phone size={12} /> Call
+                  </a>
+                  <a
+                    href={contact.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600/15 px-3.5 py-1.5 text-[0.62rem] font-sans tracking-[0.16em] text-emerald-800 hover:bg-emerald-600 hover:text-white transition uppercase"
+                    aria-label={`WhatsApp ${contact.name}`}
+                  >
+                    <MessageCircle size={12} /> WhatsApp
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <motion.button
           type="button"
           onClick={release}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.95 }}
-          className="glass-plate mt-10 rounded-full px-7 py-3 font-sans text-[0.64rem] tracking-[0.3em] text-primary uppercase"
+          className="glass-plate mt-10 rounded-full px-7 py-3 font-sans text-[0.64rem] tracking-[0.3em] text-primary uppercase cursor-pointer"
         >
           Release a wish lantern
         </motion.button>

@@ -80,14 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Roshan Roy & Indira Bakaeva — Wedding Invitation" },
       {
         name: "description",
-        content: "Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church & Cherish Ballroom, Rubicon Glasshouse.",
+        content: "Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church, Vasant Kunj & Cherish Ballroom, Rubicon Glasshouse.",
       },
       { name: "theme-color", content: "#fdf8ef" },
       { property: "og:site_name", content: "Roshan & Indira Wedding Storybook" },
       { property: "og:title", content: "Roshan Roy & Indira Bakaeva — Wedding Invitation" },
       {
         property: "og:description",
-        content: "Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church & Cherish Ballroom, Rubicon Glasshouse.",
+        content: "Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church, Vasant Kunj & Cherish Ballroom, Rubicon Glasshouse.",
       },
       { property: "og:url", content: "https://roshan-weds-indira.invitingyou.top" },
       { property: "og:image", content: "https://roshan-weds-indira.invitingyou.top/og-image.jpg" },
@@ -100,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Roshan Roy & Indira Bakaeva — Wedding Invitation" },
       {
         name: "twitter:description",
-        content: "Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church & Cherish Ballroom, Rubicon Glasshouse.",
+        content: "Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church, Vasant Kunj & Cherish Ballroom, Rubicon Glasshouse.",
       },
       { name: "twitter:image", content: "https://roshan-weds-indira.invitingyou.top/og-image.jpg" },
     ],

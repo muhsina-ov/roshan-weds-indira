@@ -1,30 +1,57 @@
-import { motion } from "motion/react";
-import { CalendarPlus, Clock, MapPin, Shirt, Sparkles } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { CalendarPlus, ChevronDown, Download, ExternalLink, MapPin, Shirt, Sparkles } from "lucide-react";
 const mapPlate = "https://media.invitestory.in/ever-after-bloom/src/assets/map-plate.jpg";
 const car = "https://media.invitestory.in/ever-after-bloom/src/assets/wedding-car.png";
 import { invitation } from "@/content/invitation";
 import { Ornament, Reveal, SectionTitle } from "./Reveal";
 
-function buildIcs() {
-  const start = new Date(invitation.dateISO);
-  const end = new Date(start.getTime() + 10 * 3_600_000);
-  const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-  const lines = [
+function getGoogleCalendarUrl() {
+  // 28 January 2027, 4:00 PM IST (16:00 IST is 10:30 UTC)
+  // End around 11:00 PM IST (23:00 IST is 17:30 UTC)
+  const startUTC = "20270128T103000Z";
+  const endUTC = "20270128T173000Z";
+  const title = encodeURIComponent(`${invitation.couple.groom} & ${invitation.couple.bride} — Wedding`);
+  const details = encodeURIComponent(
+    `Wedding of ${invitation.couple.groom} & ${invitation.couple.bride}\n\n` +
+      `• Holy Matrimony: 4:00 PM at St. Alphonsa’s Church, Vasant Kunj, New Delhi\n` +
+      `• Reception & Dinner: 6:00 PM onwards at Cherish Ballroom, Rubicon Glasshouse\n\n` +
+      `Dress Code: ${invitation.dressCode}\n\n` +
+      `We look forward to celebrating this blessed occasion with you!`
+  );
+  const location = encodeURIComponent("St. Alphonsa's Church, Vasant Kunj, New Delhi");
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startUTC}/${endUTC}&details=${details}&location=${location}`;
+}
+
+function downloadIcs() {
+  const icsLines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Wedding Storybook//EN",
+    "PRODID:-//Roshan & Indira Wedding//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
     "BEGIN:VEVENT",
-    `UID:${start.getTime()}@wedding`,
-    `DTSTAMP:${stamp(new Date())}`,
-    `DTSTART:${stamp(start)}`,
-    `DTEND:${stamp(end)}`,
+    "UID:roshan-indira-wedding-20270128@invitingyou.top",
+    "DTSTAMP:20260918T000000Z",
+    "DTSTART:20270128T103000Z",
+    "DTEND:20270128T173000Z",
     `SUMMARY:${invitation.couple.groom} & ${invitation.couple.bride} — Wedding`,
-    `LOCATION:Ceremony: ${invitation.venue.name} | Reception: ${invitation.venue.receptionName}, ${invitation.venue.receptionAddress}`,
-    "DESCRIPTION:We would be honoured to celebrate with you.",
+    `DESCRIPTION:Holy Matrimony at St. Alphonsa’s Church, Vasant Kunj (4:00 PM) followed by Wedding Reception at Cherish Ballroom, Rubicon Glasshouse (6:00 PM).`,
+    `LOCATION:St. Alphonsa’s Church, Vasant Kunj, New Delhi`,
+    "STATUS:CONFIRMED",
     "END:VEVENT",
     "END:VCALENDAR",
-  ];
-  return `data:text/calendar;charset=utf-8,${encodeURIComponent(lines.join("\r\n"))}`;
+  ].join("\r\n");
+
+  const blob = new Blob([icsLines], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "roshan-indira-wedding.ics";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
 }
 
 const cards = [
@@ -33,7 +60,7 @@ const cards = [
     icon: MapPin,
     label: "Holy Matrimony",
     title: invitation.venue.name,
-    subtitle: `${invitation.venue.type} · ${invitation.venue.time}`,
+    subtitle: `${invitation.venue.address} · ${invitation.venue.time}`,
   },
   {
     icon: MapPin,
@@ -45,17 +72,30 @@ const cards = [
     icon: Shirt,
     label: "Dress Code",
     title: invitation.dressCode,
-    subtitle: "Celebratory formal wear",
+    subtitle: "Formal Elegance / Black Tie & Indian Chic",
   },
 ];
 
 export function Details() {
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const calendarMenuRef = useRef<HTMLDivElement>(null);
+
   const churchMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     invitation.venue.mapsQuery,
   )}`;
   const receptionMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     invitation.venue.receptionMapsQuery,
   )}`;
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (calendarMenuRef.current && !calendarMenuRef.current.contains(event.target as Node)) {
+        setCalendarOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <section id="details" className="relative overflow-hidden px-5 py-24">
@@ -90,16 +130,60 @@ export function Details() {
           ))}
         </div>
 
+        {/* Action Buttons: Add to Calendar & Map Directions */}
         <Reveal delay={0.1} className="mt-8 flex flex-wrap justify-center gap-3">
-          <motion.a
-            href={buildIcs()}
-            download="wedding.ics"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-sans text-[0.66rem] tracking-[0.24em] text-primary-foreground uppercase shadow-md"
-          >
-            <CalendarPlus size={15} strokeWidth={1.6} /> Add to Calendar
-          </motion.a>
+          {/* Calendar Dropdown Container */}
+          <div className="relative" ref={calendarMenuRef}>
+            <motion.button
+              type="button"
+              onClick={() => setCalendarOpen((v) => !v)}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-sans text-[0.66rem] tracking-[0.24em] text-primary-foreground uppercase shadow-md cursor-pointer"
+              aria-expanded={calendarOpen}
+            >
+              <CalendarPlus size={15} strokeWidth={1.6} /> Add to Calendar
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-300 ${calendarOpen ? "rotate-180" : ""}`}
+              />
+            </motion.button>
+
+            <AnimatePresence>
+              {calendarOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 6, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 mt-2 z-30 w-64 rounded-2xl border border-gold/30 bg-white/95 p-2 shadow-2xl backdrop-blur-md"
+                >
+                  <a
+                    href={getGoogleCalendarUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setCalendarOpen(false)}
+                    className="flex items-center justify-between gap-2 rounded-xl px-4 py-2.5 text-xs text-primary font-sans hover:bg-gold/15 transition"
+                  >
+                    <span className="font-medium">Google Calendar</span>
+                    <ExternalLink size={14} className="text-gold-deep" />
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      downloadIcs();
+                      setCalendarOpen(false);
+                    }}
+                    className="w-full flex items-center justify-between gap-2 rounded-xl px-4 py-2.5 text-xs text-primary font-sans hover:bg-gold/15 transition text-left cursor-pointer"
+                  >
+                    <span className="font-medium">Apple / Outlook (.ics)</span>
+                    <Download size={14} className="text-gold-deep" />
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <motion.a
             href={churchMaps}
             target="_blank"

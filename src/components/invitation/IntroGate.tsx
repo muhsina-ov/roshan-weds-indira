@@ -97,7 +97,7 @@ export function IntroGate() {
       <div className="absolute inset-0 overflow-hidden">
         <img
           src={heroChurch}
-          alt="St. Alphonsa's Church, Bharananganam"
+          alt="St. Alphonsa's Church, Vasant Kunj"
           className="h-full w-full object-cover object-center scale-105 filter brightness-[0.98] contrast-[1.02]"
         />
 
@@ -225,7 +225,7 @@ export function IntroGate() {
             </div>
 
             {/* Couple Names */}
-            <div className="my-auto py-1">
+            <div className="my-auto py-0.5">
               <p className="font-serif italic text-lg sm:text-2xl text-primary font-medium tracking-wide">
                 {invitation.couple.groom}
               </p>
@@ -235,6 +235,11 @@ export function IntroGate() {
               <p className="font-serif italic text-lg sm:text-2xl text-primary font-medium tracking-wide">
                 {invitation.couple.bride}
               </p>
+              <div className="mt-1.5 flex flex-col items-center justify-center gap-0.5 text-center font-sans text-[7.5px] sm:text-[9.5px] tracking-[0.1em] text-primary/85 uppercase">
+                <span>Son of <strong className="font-bold text-primary font-serif capitalize text-[8.5px] sm:text-[11px] tracking-normal">{invitation.couple.groomParents}</strong></span>
+                <span className="text-amber-700/80 font-script text-xs sm:text-sm italic lowercase">&amp;</span>
+                <span>Daughter of <strong className="font-bold text-primary font-serif capitalize text-[8.5px] sm:text-[11px] tracking-normal">{invitation.couple.brideParents}</strong></span>
+              </div>
             </div>
 
             {/* Venue & Date */}
@@ -428,7 +433,7 @@ export function IntroGate() {
                 <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-l from-transparent to-amber-700/50" />
               </div>
               <p className="mt-1 text-[0.6rem] font-serif italic text-primary/70">
-                St. Alphonsa's Forane Church, Bharananganam
+                St. Alphonsa's Church, Vasant Kunj
               </p>
             </motion.div>
           )}

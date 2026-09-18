@@ -140,18 +140,22 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.65 }}
-          className="mt-4 flex flex-col items-center justify-center gap-1 font-sans text-[0.6rem] tracking-[0.2em] text-primary/80 uppercase sm:flex-row sm:gap-x-3 sm:text-[0.72rem]"
+          className="mt-4 flex flex-col items-center justify-center gap-1 font-sans text-xs tracking-[0.14em] text-primary/85 uppercase sm:flex-row sm:gap-x-3.5 sm:text-sm"
         >
-          <span>Son of {invitation.couple.groomParents}</span>
-          <span className="hidden font-script text-sm text-gold-deep italic lowercase sm:inline">&amp;</span>
-          <span>Daughter of {invitation.couple.brideParents}</span>
+          <span className="drop-shadow-xs">
+            Son of <strong className="font-bold text-primary font-serif tracking-normal text-sm sm:text-base capitalize drop-shadow-sm">{invitation.couple.groomParents}</strong>
+          </span>
+          <span className="hidden font-script text-base text-gold-deep font-bold italic lowercase sm:inline">&amp;</span>
+          <span className="drop-shadow-xs">
+            Daughter of <strong className="font-bold text-primary font-serif tracking-normal text-sm sm:text-base capitalize drop-shadow-sm">{invitation.couple.brideParents}</strong>
+          </span>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, scaleX: 0.4 }}
           animate={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 1.2, delay: 0.9 }}
-          className="mt-4 h-px w-40 origin-center"
+          className="mt-3.5 h-px w-36 origin-center"
           style={{ background: "var(--gradient-gold)" }}
         />
 
@@ -169,7 +173,7 @@ export function Hero() {
           transition={{ duration: 1.2, delay: 1.15 }}
           className="mt-1 font-sans text-[0.62rem] tracking-[0.22em] text-primary/65 uppercase sm:text-[0.7rem]"
         >
-          St. Alphonsa’s Church · Cherish Ballroom, Rubicon Glasshouse
+          St. Alphonsa’s Church, Vasant Kunj · Cherish Ballroom, Rubicon Glasshouse
         </motion.p>
 
         <motion.a

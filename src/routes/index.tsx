@@ -11,7 +11,7 @@ import { Footer } from "@/components/invitation/Footer";
 import { invitation } from "@/content/invitation";
 
 const title = `${invitation.couple.groom} & ${invitation.couple.bride} — Wedding Invitation`;
-const description = `Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church & Cherish Ballroom, Rubicon Glasshouse.`;
+const description = `Join Roshan Roy & Indira Bakaeva on 28 January 2027 at St. Alphonsa's Church, Vasant Kunj & Cherish Ballroom, Rubicon Glasshouse.`;
 const ogImageUrl = `${invitation.productionUrl}/og-image.jpg`;
 
 export const Route = createFileRoute("/")({
